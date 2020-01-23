@@ -2,6 +2,7 @@ FROM ubuntu:18.10
 
 COPY ./.bashrc /root/.bashrc
 COPY ./.bash_profile /root/.bash_profile
+COPY ./auto-complete.sh /root
 
 RUN apt-get update && apt-get -y install \
     gnupg \
@@ -16,8 +17,7 @@ RUN echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/a
 RUN apt-get update && apt-get install -y kubectl
 
 # Configure auto-complete for bash
-RUN /bin/bash echo "source <(kubectl completion bash)" >> ~/.bashrcource <(kubectl completion bash) # setup autocomplete in bash into the current shell, bash-completion package should be installed first. \
-    /bin/bash source ~/.bashrc # add autocomplete permanently to your bash shell.
+RUN ./auto-complete.sh
 
 ENV SHELL /usr/bin/bash
 

@@ -2,7 +2,7 @@ FROM ubuntu:18.10
 
 COPY ./.bashrc /root/.bashrc
 COPY ./.bash_profile /root/.bash_profile
-COPY ./auto-complete.sh /root/auto-complete.sh
+COPY ./bootstrap.sh /root/bootstrap.sh
 
 RUN apt-get update && apt-get -y install \
     gnupg \
@@ -19,9 +19,9 @@ RUN apt-get update && apt-get install -y kubectl
 
 WORKDIR /root
 
-# Configure auto-complete for bash
-# RUN chmod +x auto-complete.sh
-# RUN ./auto-complete.sh
+# Bootstrap kubectl
+RUN chmod +x bootstrap.sh
+RUN ./bootstrap.sh
 
 ENV SHELL /usr/bin/bash
 

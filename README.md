@@ -1,4 +1,4 @@
-# Kubectl with auto-mpletion in a docker container
+# Kubectl with auto-completion in a docker container
 
 The purpose of this tool is to have a fully portable <code>kubectl</code> command line tool with a few convinience utilities.
 Quick testing of a cluster with well-known/customized <code>kubectl</code> setup.

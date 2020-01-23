@@ -12,5 +12,11 @@ echo "source <(kubectl completion bash)" >> ~/.bashrcource <(kubectl completion 
   "$KREW" install --manifest=krew.yaml --archive=krew.tar.gz &&
   "$KREW" update
 )
+
+(
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+)
+
 # Add krew to path to call it from kubectl
 source ~/.bashrc

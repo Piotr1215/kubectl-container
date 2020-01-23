@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+  zsh-in-docker:
+    image: zsh-in-docker
+    build: .
+    ports:
+      - 3000:3000

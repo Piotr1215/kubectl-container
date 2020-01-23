@@ -1,14 +1,16 @@
 FROM ubuntu:18.10
 
 COPY ./.bashrc /root/.bashrc
+COPY ./.bash_profile /root/.bash_profile
 
 RUN apt-get update && apt-get -y install \
     gnupg \
     curl \
-    git
+    git \
+    bash-completion \
+    apt-transport-https
 
 # Install kubectl
-RUN apt-get -y install apt-transport-https
 RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 RUN echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list
 RUN apt-get update && apt-get install -y kubectl

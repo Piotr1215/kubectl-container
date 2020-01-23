@@ -12,7 +12,5 @@ echo "source <(kubectl completion bash)" >> ~/.bashrcource <(kubectl completion 
   "$KREW" install --manifest=krew.yaml --archive=krew.tar.gz &&
   "$KREW" update
 )
-
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
+# Add krew to path to call it from kubectl
 source ~/.bashrc

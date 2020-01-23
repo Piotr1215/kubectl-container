@@ -1,0 +1,1 @@
+docker run --network=host --rm -it piotrzan/kubectl-comp

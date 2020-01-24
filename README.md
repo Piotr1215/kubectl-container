@@ -19,14 +19,14 @@ docker build --rm -f "Dockerfile" -t piotrzan/kubectl-comp "."
 Use `run.ps1` or `run.sh` for windows or linux respectivels
 
 ### Linux Example
-\# **Run contianer with passthrough to local network**
+**Run contianer with passthrough to local network**
 `docker run -d --network=host --name=kubectl-host --rm -it piotrzan/kubectl-comp`
 
-\# **Generate raw config from kubeclt on localhost and copy the config to the container**
+**Generate raw config from kubeclt on localhost and copy the config to the container**
 `kubeclt config view --raw > config
 docker cp ./config kubectl-host:./root/.kube`
 
-\# **Attach back to the contianer with kubeconfig file containing info about clusters running on localhost**
+**Attach back to the contianer with kubeconfig file containing info about clusters running on localhost**
 `docker attach kubectl-host`
 
 ## Extending the image

@@ -1,0 +1,8 @@
+version: '2'
+services:
+  kubectl-host:
+    image: piotrzan/kubectl-comp
+    container_name: kubectl-host
+    tty: true
+    volumes:
+     - ~/.kube/:/root/.kube/

@@ -13,7 +13,6 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
     bash-completion \
     apt-transport-https \
     ca-certificates \
-    figlet \
     && rm -rf /var/lib/apt/lists/*
 
 ENV SHELL /usr/bin/bash

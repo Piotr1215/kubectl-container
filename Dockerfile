@@ -1,5 +1,5 @@
 FROM ubuntu:18.10
-MAINTAINER Piotr Zaniewski <piotrzan@gmail.com>
+LABEL maintainer="Piotr Zaniewski <piotrzan@gmail.com>"
 
 WORKDIR /root
 

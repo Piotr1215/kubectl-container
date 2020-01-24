@@ -8,6 +8,7 @@ COPY .bashrc .bash_profile bootstrap.sh ./
 RUN apt-get update && apt-get -y install --no-install-recommends \
     gnupg \
     curl \
+    wget \
     git \
     bash-completion \
     apt-transport-https \

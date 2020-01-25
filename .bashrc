@@ -23,10 +23,6 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -63,14 +59,6 @@ else
 fi
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -83,9 +71,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -103,16 +88,14 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# my aliases
+# Kubectl auto-completion and aliases
 source <(kubectl completion bash)
 alias k=kubectl
 complete -F __start_kubectl k
-
-# My path aliases
-alias dev='cd /mnt/d/dev/'
-alias decod='cd /mnt/c/Users/decod/'
-LS_COLORS='rs=0:di=1;35:ln=01;36:mh=00:pi=40;33:so=01;35:do=01:ow=01;36;40:'
-export LS_COLORS
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+alias kdump='kubectl get all --all-namespaces'
+alias krun='k run -h | grep "# " -A2'
+alias kdiag='kubectl run -it --rm debug --image=busybox --restart=Never -- sh'
 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+

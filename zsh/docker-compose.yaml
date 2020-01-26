@@ -1,7 +1,7 @@
 version: '2'
 services:
   kubectl-host:
-    image: piotrzan/kubectl-comp
+    image: piotrzan/kubectl-comp:zsh
     container_name: kubectl-host
     tty: true
     network_mode: "host"

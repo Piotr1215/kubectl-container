@@ -5,11 +5,12 @@ Quick testing of a cluster with well-known/customized `kubectl` setup.
 
 ## What is included
 
+There are two images, one for bash shell and one for zsh.
+
 - ``kubectl`` v 1.17.2
-- ``kubectl`` bash completion
-- ``krew`` plugin
+- ``kubectl`` bash/zsh completion
 - ``k9s`` cluster monitoring tool
-- common .bashrc aliases
+- common .bashrc/.zshrc aliases
 
 ## How to use
 
@@ -20,6 +21,10 @@ After running docker container, all the clusters running on the localhost should
 - **zsh**
   docker pull piotrzan/kubectl-comp:zsh
   [Dockerfile](https://github.com/Piotr1215/kubectl-container/blob/master/zsh/Dockerfile)
+
+- **bash**
+  docker pull piotrzan/kubectl-comp
+  [Dockerfile](https://github.com/Piotr1215/kubectl-container/blob/master/bash/Dockerfile)
 
 ## How the images are build
 

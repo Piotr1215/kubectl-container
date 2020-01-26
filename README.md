@@ -15,9 +15,15 @@ Quick testing of a cluster with well-known/customized `kubectl` setup.
 
 After running docker container, all the clusters running on the localhost should be available for `kubectl` command.
 
-## How the image was build
+## Supported tags
 
-docker build --rm -f "Dockerfile" -t piotrzan/kubectl-comp "."
+- zsh
+
+## How the images are build
+
+docker build --rm -f "./bash/Dockerfile" -t piotrzan/kubectl-comp "." - __this builds image with bash shell__
+
+docker build --rm -f "./zsh/Dockerfile" -t piotrzan/kubectl-comp:zsh "." - __this builds image with zsh shell__
 
 ## Convinient scripts to run the contianer
 

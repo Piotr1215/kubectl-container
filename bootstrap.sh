@@ -25,5 +25,16 @@ echo "source <(kubectl completion bash)" >> ~/.bashrcource <(kubectl completion 
   mv k9s /usr/local/bin/
 )
 
+echo 'Installing Oh-My-Zsh'
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+echo 'Installing zsh-autosuggestions'
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+echo 'Installing kube prompt'
+git clone https://github.com/jonmosco/kube-ps1.git
+
 # Add krew to path to call it from kubectl
 source ~/.bashrc
+source ~/.zshrc
+chsh -s $(which zsh)

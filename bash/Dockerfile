@@ -3,7 +3,7 @@ LABEL maintainer="Piotr Zaniewski <piotrzan@gmail.com>"
 
 WORKDIR /root
 
-COPY .zshrc .bashrc .bash_profile bootstrap.sh ./
+COPY .bashrc .bash_profile bootstrap.sh ./
 
 RUN apt-get update && apt-get -y install --no-install-recommends \
     gnupg \
@@ -25,4 +25,4 @@ RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add 
 # Bootstrap kubectl
 RUN chmod +x bootstrap.sh && ./bootstrap.sh
 
-ENTRYPOINT ["/bin/zsh"]
+ENTRYPOINT ["/bin/bash"]

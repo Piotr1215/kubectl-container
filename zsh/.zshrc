@@ -2,13 +2,14 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/decoder/.oh-my-zsh"
-
+export ZSH="/root/.oh-my-zsh"
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -70,9 +71,7 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions kubectl)
 
-source $HOME/kube-ps1/kube-ps1.sh
 source $ZSH/oh-my-zsh.sh
-
 
 # User configuration
 
@@ -114,15 +113,11 @@ export PATH=$PATH:"$ZSH_CUSTOM/plugins/navi"
 
 export KUBECONFIG=$HOME/.kube/config
 
-echo "Setting up docker variables from minikube"
-export DOCKER_TLS_VERIFY=1
-export DOCKER_HOST=tcp://192.168.99.101:2376
-export DOCKER_CERT_PATH=/mnt/c/Users/decod/.minikube/certs
-export DOCKER_MACHINE_NAME=minikube
+
+
+
 
 PATH=$HOME/.local/bin:$PATH
-
-PROMPT='$(kube_ps1)'$PROMPT
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 kcdebug() { kubectl run -i --rm --tty debug --image=busybox --restart=Never -- sh }

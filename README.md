@@ -17,7 +17,9 @@ After running docker container, all the clusters running on the localhost should
 
 ## Supported tags
 
-- zsh
+- **zsh**
+  docker pull piotrzan/kubectl-comp:zsh
+  [Dockerfile](https://github.com/Piotr1215/kubectl-container/blob/master/zsh/Dockerfile)
 
 ## How the images are build
 

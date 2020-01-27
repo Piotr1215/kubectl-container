@@ -9,7 +9,6 @@ There are two images, one for bash shell and one for zsh.
 
 - `kubectl` v 1.17.2, bash/zsh completion
 - `zsh-autosuggestions` for zsh shell
-- `kubectl`
 - `k9s` cluster monitoring tool
 - popular tools: `curl, wget, git`
 - useful .bashrc/.zshrc aliases

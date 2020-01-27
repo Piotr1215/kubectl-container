@@ -7,10 +7,12 @@ Quick testing of a cluster with well-known/customized `kubectl` setup.
 
 There are two images, one for bash shell and one for zsh.
 
-- ``kubectl`` v 1.17.2
-- ``kubectl`` bash/zsh completion
-- ``k9s`` cluster monitoring tool
-- common .bashrc/.zshrc aliases
+- `kubectl` v 1.17.2, bash/zsh completion
+- `zsh-autosuggestions` for zsh shell
+- `kubectl`
+- `k9s` cluster monitoring tool
+- popular tools: `curl, wget, git`
+- useful .bashrc/.zshrc aliases
 
 ## How to use
 
@@ -28,9 +30,13 @@ After running docker container, all the clusters running on the localhost should
 
 ## How the images are build
 
-docker build --rm -f "Dockerfile" -t piotrzan/kubectl-comp "." - __this builds image with bash shell__
+### Build image with bash shell
 
-docker build --rm -f "Dockerfile" -t piotrzan/kubectl-comp:zsh "." - __this builds image with zsh shell__
+docker build --rm -f "Dockerfile" -t piotrzan/kubectl-comp "."
+
+### Build image with zsh shell
+
+docker build --rm -f "Dockerfile" -t piotrzan/kubectl-comp:zsh "."
 
 ## Convinient scripts to run the contianer
 
@@ -51,4 +57,4 @@ docker cp ./config kubectl-host:./root/.kube`
 
 ## Extending the image
 
-If you would like to add your own customization or ``krew`` plugins, you can easily do it and use `docker commit` to create your own version of the image.
+If you would like to add your own customization, you can easily do it and use `docker commit` to create your own version of the image.

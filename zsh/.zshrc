@@ -3,7 +3,9 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="/root/.oh-my-zsh"
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -100,26 +102,18 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # # My path aliases
 alias kdump='kubectl get all --all-namespaces'
-alias addkey='eval $(ssh-agent) && ssh-add'
+alias krun='k run -h | grep "# " -A2'
+alias kdiag='kubectl run -it --rm debug --image=busybox --restart=Never -- sh'
+alias diskusage='du -sh * | sort -h --reverse'
 alias ll='ls -lah'
 
 eval $(dircolors -p | sed -e 's/DIR 01;34/DIR 01;36/' | dircolors /dev/stdin)
-export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
-
-# add Pulumi to the PATH
-export PATH=$PATH:$HOME/.krew/bin
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-export PATH=$PATH:"$ZSH_CUSTOM/plugins/navi"
 
 export KUBECONFIG=$HOME/.kube/config
-
-
-
-
 
 PATH=$HOME/.local/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 kcdebug() { kubectl run -i --rm --tty debug --image=busybox --restart=Never -- sh }
-alias diskusage='du -sh * | sort -h --reverse'
+
 

@@ -42,7 +42,9 @@ docker build --rm -f "Dockerfile" -t piotrzan/kubectl-comp:zsh "."
 Use `run.ps1` or `run.sh` for windows or linux respectivels.
 Alternatively use docker-compose.yaml, this works by mounting a volume on the $HOME/.kube folder on the host.
 
-Another option is running `make` (defaults to content of run script). Linux has make installed by default, for Windows please install first [Make for Windows](http://gnuwin32.sourceforge.net/packages/make.htm).
+Another option is running `make` (defaults to content of run script). `Make` can be run from root directory and will run images depending on the tasks. Linux has `make` installed by default, for Windows please install first [Make for Windows](http://gnuwin32.sourceforge.net/packages/make.htm).
+
+ZSH container will be ran by default.
 
 ### Linux Example
 

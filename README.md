@@ -5,14 +5,24 @@ Quick testing of a cluster with well-known/customized `kubectl` setup.
 
 ## What is included
 
-There are two three, one for bash shell, one for zsh and one for zsh with krew plugin manager preinstalled.
+There are two images, one simple image with *bash* shell containing:
 
-- `kubectl` v 1.17.2, bash/zsh completion
-- `zsh-autosuggestions` for zsh shell
-- `helm` and `okteto` for zsh shell
-- `k9s` cluster monitoring tool
+- `kubectl` - Kuberneted CLI v 1.17.2 with bash completion
+- `k9s` - cluster monitoring tool
 - popular tools: `curl, wget, git`
-- useful .bashrc/.zshrc aliases
+- useful aliases
+
+And one fancy image for *zsh* with more tools preinstalled:
+
+- `kubectl` - Kubernetes CLI v 1.17.2 with zsh completion
+- `zsh-autosuggestions`
+- `helm` - Kubernetes package manager
+- `okteto` - development platform for Kubernetes applications
+- `k9s` - cluster monitoring tool
+- `krew` - Kubernetes plugin manager
+- `tmux` based on highly customized, [great repo from samoshkin](https://github.com/samoshkin/tmux-config)
+- popular tools: `curl, wget, git`
+- useful aliases
 
 ## How to use
 
@@ -63,5 +73,5 @@ docker cp ./config kubectl-host:./root/.kube`
 
 If you would like to add your own customization, you can easily do it and use `docker commit` to create your own version of the image.
 
-`docker commit $(docker ps -aqf "name=kubectl-host") piotrzan/kubectl-comp:zsh-krew` - this captures contianer kubectl-host as a new tag
-`docker push piotrzan/kubectl-comp:zsh-krew`
+`docker commit $(docker ps -aqf "name=kubectl-host") piotrzan/kubectl-comp:zsh` - this captures contianer kubectl-host as a new tag
+`docker push piotrzan/kubectl-comp:zsh`

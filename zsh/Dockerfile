@@ -13,6 +13,7 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
     apt-transport-https \
     ca-certificates \
     zsh \
+    tmux \
     && rm -rf /var/lib/apt/lists/*
 
 ENV SHELL /usr/bin/zsh
@@ -29,4 +30,4 @@ COPY .zshrc ./
 
 RUN exec zsh
 
-ENTRYPOINT ["/bin/zsh"]
+ENTRYPOINT ["/bin/zsh", "-c", "tmux"]

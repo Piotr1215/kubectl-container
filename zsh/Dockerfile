@@ -30,4 +30,4 @@ COPY .zshrc ./
 
 RUN exec zsh
 
-ENTRYPOINT ["/bin/zsh", "-c", "tmux"]
+ENTRYPOINT ["/bin/zsh"]

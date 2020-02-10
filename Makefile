@@ -1,4 +1,4 @@
-IMAGE?=piotrzan/kubectl-comp:zsh-krew
+IMAGE?=piotrzan/kubectl-comp:zsh
 #piotrzan/kubectl-comp:zsh
 #piotrzan/kubectl-comp
 

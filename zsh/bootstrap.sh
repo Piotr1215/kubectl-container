@@ -18,5 +18,16 @@ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools
 echo '[STEP 4] Installing zsh-autosuggestions plugin'
 git clone https://github.com/zsh-users/zsh-autosuggestions /root/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
-echo '[STEP 5] Setting zsh as default shell'
+echo '[STEP 5] Installing stern'
+(
+    wget https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64 && \
+    chmod +x stern_linux_amd64 && \
+    mv stern_linux_amd64 /usr/local/bin/stern
+)
+
+echo '[STEP 6] Installing Okteto for local development'
+curl https://get.okteto.com -sSfL | sh
+
+echo '[STEP 7] Setting zsh as default shell'
 chsh -s $(which zsh)
+

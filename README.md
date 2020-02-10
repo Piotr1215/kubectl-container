@@ -5,10 +5,11 @@ Quick testing of a cluster with well-known/customized `kubectl` setup.
 
 ## What is included
 
-There are two images, one for bash shell and one for zsh.
+There are two three, one for bash shell, one for zsh and one for zsh with krew plugin manager preinstalled.
 
 - `kubectl` v 1.17.2, bash/zsh completion
 - `zsh-autosuggestions` for zsh shell
+- `helm` and `okteto` for zsh shell
 - `k9s` cluster monitoring tool
 - popular tools: `curl, wget, git`
 - useful .bashrc/.zshrc aliases
@@ -61,3 +62,6 @@ docker cp ./config kubectl-host:./root/.kube`
 ## Extending the image
 
 If you would like to add your own customization, you can easily do it and use `docker commit` to create your own version of the image.
+
+`docker commit $(docker ps -aqf "name=kubectl-host") piotrzan/kubectl-comp:zsh-krew` - this captures contianer kubectl-host as a new tag
+`docker push piotrzan/kubectl-comp:zsh-krew`

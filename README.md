@@ -12,10 +12,12 @@ There are two images, one simple image with *bash* shell containing:
 - popular tools: `curl, wget, git`
 - useful aliases
 
-And one fancy image for *zsh* with more tools preinstalled:
+Use this image if you want to quickly check and explore Kubernetes cluster without investing too much time.
+
+And one is a fancy image for *zsh* with more tools preinstalled:
 
 - `kubectl` - Kubernetes CLI v 1.17.2 with zsh completion
-- `zsh-autosuggestions`
+- `zsh-autosuggestions` - very useful zsh shell plugin showing previous commands and enabling easy autofill of text
 - `helm` - Kubernetes package manager
 - `okteto` - development platform for Kubernetes applications
 - `k9s` - cluster monitoring tool
@@ -24,9 +26,31 @@ And one fancy image for *zsh* with more tools preinstalled:
 - popular tools: `curl, wget, git`
 - useful aliases
 
+Use this image if you want to monitor and develop for Kubernetes. This is my default image with all favourite tools and settings.
+
 ## How to use
 
 After running docker container, all the clusters running on the localhost should be available for `kubectl` command.
+
+### Aliases
+
+Make use of aliases defined for both shells *bash* and *zsh*
+
+__Instead of typing kubectl all the time, abbreviate it to just “k”__
+
+    alias k=kubectl
+
+__Check what is running on the cluster__
+
+    alias kdump='kubectl get all --all-namespaces'
+
+__Display helpful info for creating k8s resources imperatively__
+
+    alias krun='k run -h | grep “# “ -A2'
+
+__Quickly spin up busybox pod for diagnostic purposes__
+
+    alias kdiag='kubectl run -it --rm debug --image=busybox --restart=Never -- sh'
 
 ## Supported tags
 
@@ -42,11 +66,11 @@ After running docker container, all the clusters running on the localhost should
 
 ### Build image with bash shell
 
-docker build --rm -f "Dockerfile" -t piotrzan/kubectl-comp "."
+    docker build --rm -f "Dockerfile" -t piotrzan/kubectl-comp "."
 
 ### Build image with zsh shell
 
-docker build --rm -f "Dockerfile" -t piotrzan/kubectl-comp:zsh "."
+    docker build --rm -f "Dockerfile" -t piotrzan/kubectl-comp:zsh "."
 
 ## Convinient scripts to run the contianer
 
@@ -59,15 +83,20 @@ ZSH container will be ran by default.
 
 ### Linux Example
 
+Below is also the default for `make` command.
+
 **Run contianer with passthrough to local network**
-`docker run -d --network=host --name=kubectl-host --rm -it piotrzan/kubectl-comp`
+
+    docker run -d --network=host --name=kubectl-host --rm -it piotrzan/kubectl-comp
 
 **Generate raw config from kubeclt on localhost and copy the config to the container**
-`kubeclt config view --raw > config
-docker cp ./config kubectl-host:./root/.kube`
+
+    kubeclt config view --raw > config
+    docker cp ./config kubectl-host:./root/.kube
 
 **Attach back to the contianer with kubeconfig file containing info about clusters running on localhost**
-`docker attach kubectl-host`
+
+    docker attach kubectl-host
 
 ## Extending the image
 

@@ -1,21 +1,16 @@
-ZSH = piotrzan/kubectl-comp:zsh
-BASH = piotrzan/kubectl-comp
+IMAGE?=piotrzan/kubectl-comp:zsh-krew
+#piotrzan/kubectl-comp:zsh
+#piotrzan/kubectl-comp
 
 .PHONY: all run-detatch-zsh run-zsh run-detatch-bash run-bash copy attach zsh-run bash-run
 
 all: zsh-run
 
 run-detatch-zsh:
-	docker run -d --network=host --name=kubectl-host --rm -it $(ZSH)
+	docker run -d --network=host --name=kubectl-host --rm -it $(IMAGE)
 
 run-zsh:
-	docker run --network=host --name=kubectl-host --rm -it $(ZSH)
-
-run-detatch-bash:
-	docker run -d --network=host --name=kubectl-host --rm -it $(BASH)
-
-run-bash:
-	docker run --network=host --name=kubectl-host --rm -it $(BASH)
+	docker run --network=host --name=kubectl-host --rm -it $(IMAGE)
 
 copy:
 	kubectl config view --raw > config
@@ -25,5 +20,3 @@ attach:
 	docker attach kubectl-host
 
 zsh-run: run-detatch-zsh copy attach
-
-bash-run: run-detatch-bash copy attach

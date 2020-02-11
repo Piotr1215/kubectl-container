@@ -96,6 +96,5 @@ alias kdump='kubectl get all --all-namespaces'
 alias krun='k run -h | grep "# " -A2'
 alias kdiag='kubectl run -it --rm debug --image=busybox --restart=Never -- sh'
 
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 

@@ -13,6 +13,7 @@ There are two images, one simple image with *bash* shell containing:
 - useful aliases
 
 Use this image if you want to quickly check and explore Kubernetes cluster without investing too much time.
+This image is optimized for size performance.
 
 And one is a fancy image for *zsh* with more tools preinstalled:
 
@@ -27,6 +28,7 @@ And one is a fancy image for *zsh* with more tools preinstalled:
 - useful aliases
 
 Use this image if you want to monitor and develop for Kubernetes. This is my default image with all favourite tools and settings.
+This image is optimized for usability.
 
 ## How to use
 

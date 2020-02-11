@@ -1,28 +1,32 @@
-FROM ubuntu:18.10
+FROM alpine:3.7 as stage
 LABEL maintainer="Piotr Zaniewski <piotrzan@gmail.com>"
 
 WORKDIR /root
 
 COPY .bashrc .bash_profile bootstrap.sh ./
 
-RUN apt-get update && apt-get -y install --no-install-recommends \
-    gnupg \
-    curl \
-    wget \
-    git \
+ADD https://storage.googleapis.com/kubernetes-release/release/v1.6.4/bin/linux/amd64/kubectl /usr/local/bin/kubectl
+
+RUN apk add --no-cache \
     bash-completion \
-    apt-transport-https \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-ENV SHELL /usr/bin/bash
-
-# Install kubectl
-RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
-    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
-    apt-get update && apt-get -y install --no-install-recommends kubectl
-
 # Bootstrap kubectl
-RUN chmod +x bootstrap.sh && ./bootstrap.sh
+RUN set -x && \
+    apk add --no-cache curl ca-certificates && \
+    chmod +x /usr/local/bin/kubectl && \
+    kubectl version --client
+
+FROM alpine:3.7 as app
+
+WORKDIR /root
+
+RUN mkdir /root/.kube \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=stage ["/usr/local/bin/kubectl", "/usr/local/bin/"]
+
+COPY .bashrc .bash_profile ./
 
 ENTRYPOINT ["/bin/bash"]

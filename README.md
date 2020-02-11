@@ -11,7 +11,7 @@ There are two images, one simple image with *bash* shell containing:
 - useful aliases
 
 Use this image if you want to quickly check and explore Kubernetes cluster without investing too much time.
-This image is optimized for size performance and is based on ``Apline`` base image.
+This image is optimized for size performance and is based on ``Apline`` base image and is **16 MB** compressed size.
 
 And one is a fancy image for *zsh* with more tools preinstalled:
 
@@ -26,7 +26,7 @@ And one is a fancy image for *zsh* with more tools preinstalled:
 - useful aliases
 
 Use this image if you want to monitor and develop for Kubernetes. This is my default image with all favourite tools and settings.
-This image is optimized for usability and is based on ``Ubuntu`` base image.
+This image is optimized for usability and is based on ``Ubuntu`` base image and is **168 MB** compressed size.
 
 ## How to use
 
@@ -83,7 +83,7 @@ ZSH container will be ran by default.
 
 ### Linux Example
 
-Below is also the default for `make` command.
+By default `make` command will run `zsh` container with direct mount on the *($home)/.kube directory*.
 
 **Run contianer with passthrough to local network**
 

@@ -25,13 +25,20 @@ echo '[STEP 5] Installing stern'
     mv stern_linux_amd64 /usr/local/bin/stern
 )
 
-echo '[STEP 6] Installing Okteto for local development'
+echo '[STEP 6] Installing kubectx and kubens - quickly switch kubernetes context and namespace'
+(
+  git clone https://github.com/ahmetb/kubectx /opt/kubectx && \
+  ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx && \
+  ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+)
+
+echo '[STEP 7] Installing Okteto for local development'
 curl https://get.okteto.com -sSfL | sh
 
-echo '[STEP 7] Install tmux with cool customizations'
+echo '[STEP 8] Install tmux with cool customizations'
 git clone https://github.com/samoshkin/tmux-config.git
 ./tmux-config/install.sh
 
-echo '[STEP 8] Setting zsh as default shell'
+echo '[STEP 9] Setting zsh as default shell'
 chsh -s $(which zsh)
 

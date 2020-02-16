@@ -20,7 +20,8 @@ And one is a fancy image for *zsh* with more tools preinstalled:
 - `helm` - Kubernetes package manager
 - `okteto` - development platform for Kubernetes applications
 - `k9s` - cluster monitoring tool
-- `krew` - Kubernetes plugin manager
+- `kubectx` - easily switch between Kubernetes contexts
+- `kubens` - easily switch between Kubernetes namespaces
 - `tmux` based on highly customized, [great repo from samoshkin](https://github.com/samoshkin/tmux-config)
 - popular tools: `curl, wget, git`
 - useful aliases

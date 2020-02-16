@@ -28,17 +28,7 @@ echo '[STEP 5] Installing stern'
 echo '[STEP 6] Installing Okteto for local development'
 curl https://get.okteto.com -sSfL | sh
 
-echo '[STEP 7] Installing krew plugin manager'
-(
-  set -x; cd "$(mktemp -d)" &&
-  curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/download/v0.3.3/krew.{tar.gz,yaml}" &&
-  tar zxvf krew.tar.gz &&
-  KREW=./krew-"$(uname | tr '[:upper:]' '[:lower:]')_amd64" &&
-  "$KREW" install --manifest=krew.yaml --archive=krew.tar.gz &&
-  "$KREW" update
-)
-
-echo '[STEP 8] Install tmux with cool customizations'
+echo '[STEP 7] Install tmux with cool customizations'
 git clone https://github.com/samoshkin/tmux-config.git
 ./tmux-config/install.sh
 

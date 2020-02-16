@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   kubectl-host:
     image: piotrzan/kubectl-comp
@@ -7,3 +7,4 @@ services:
     network_mode: "host"
     volumes:
      - ~/.kube/:/root/.kube/
+    command: "/bin/sh"

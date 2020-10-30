@@ -7,7 +7,7 @@ Quick testing of a cluster with well-known/customized `kubectl` setup.
 
 There are two images, one simple image with *bash* shell containing:
 
-- `kubectl` - Kuberneted CLI v 1.17.2 with bash completion
+- `kubectl` - Kuberneted CLI v 1.19.3 with bash completion
 - useful aliases
 
 Use this image if you want to quickly check and explore Kubernetes cluster without investing too much time.

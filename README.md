@@ -7,7 +7,9 @@ Quick testing of a cluster with well-known/customized `kubectl` setup.
 
 There are two images, one simple image with *bash* shell containing:
 
-- `kubectl` - Kuberneted CLI v 1.19.3 with bash completion
+- `kubectl` - Kuberneted CLI v 1.20.0 with bash completion
+  > It is easy to override `kubectl` version by using `--build-arg` flag in docker build command
+  > `docker build --build-arg KUBECTL_VERSION=v1.19.4 --rm -f "Dockerfile" -t piotrzan/kubectl-comp "."`
 - useful aliases
 
 Use this image if you want to quickly check and explore Kubernetes cluster without investing too much time.

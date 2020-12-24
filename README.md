@@ -92,7 +92,7 @@ By default `make` command will run `zsh` container with direct mount on the *($h
 
 **Generate raw config from kubeclt on localhost and copy the config to the container**
 
-    kubeclt config view --raw > config
+    kubectl config view --raw > config
     docker cp ./config kubectl-host:./root/.kube
 
 **Attach back to the contianer with kubeconfig file containing info about clusters running on localhost**

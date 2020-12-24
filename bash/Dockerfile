@@ -1,4 +1,4 @@
-FROM alpine:3.7 as stage
+FROM alpine:latest as stage
 LABEL maintainer="Piotr Zaniewski <piotrzan@gmail.com>"
 
 ARG KUBECTL_VERSION="v1.20.0"
@@ -21,7 +21,7 @@ RUN set -x && \
     chmod +x /usr/local/bin/kubectl && \
     kubectl version --client
 
-FROM alpine:3.7 as app
+FROM alpine:latest as app
 
 WORKDIR /root
 

@@ -1,11 +1,14 @@
 FROM alpine:3.7 as stage
 LABEL maintainer="Piotr Zaniewski <piotrzan@gmail.com>"
 
+ARG KUBECTL_VERSION="v1.20.0"
+ENV ENV_KUBECTL_VERSION=${KUBECTL_VERSION}
+
 WORKDIR /root
 
 COPY .bashrc .bash_profile bootstrap.sh ./
 
-ADD https://storage.googleapis.com/kubernetes-release/release/v1.6.4/bin/linux/amd64/kubectl /usr/local/bin/kubectl
+ADD https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl /usr/local/bin/kubectl
 
 RUN apk add --no-cache \
     bash-completion \

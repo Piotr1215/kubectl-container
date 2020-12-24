@@ -28,7 +28,9 @@ WORKDIR /root
 RUN mkdir /root/.kube \
     && rm -rf /var/lib/apt/lists/*
 
-COPY --from=stage ["/usr/local/bin/kubectl", "/usr/local/bin/", "/bin/"]
+RUN /bin/sh -c "apk add --no-cache bash"
+
+COPY --from=stage ["/usr/local/bin/kubectl", "/usr/local/bin/"]
 
 COPY .bashrc .bash_profile ./
 

@@ -28,7 +28,7 @@ WORKDIR /root
 RUN mkdir /root/.kube \
     && rm -rf /var/lib/apt/lists/*
 
-COPY --from=stage ["/usr/local/bin/kubectl", "/usr/local/bin/"]
+COPY --from=stage ["/usr/local/bin/kubectl", "/usr/local/bin/", "/bin/"]
 
 COPY .bashrc .bash_profile ./
 

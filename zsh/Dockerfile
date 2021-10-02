@@ -1,4 +1,4 @@
-FROM ubuntu:rolling
+FROM ubuntu:21.04
 LABEL maintainer="Piotr Zaniewski <piotrzan@gmail.com>"
 
 WORKDIR /root

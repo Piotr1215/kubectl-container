@@ -1,4 +1,4 @@
-FROM ubuntu:21.04
+FROM ubuntu:impish-20211015
 LABEL maintainer="Piotr Zaniewski <piotrzan@gmail.com>"
 
 WORKDIR /root

@@ -1,4 +1,4 @@
-FROM ubuntu:impish-20210928
+FROM ubuntu:rolling
 LABEL maintainer="Piotr Zaniewski <piotrzan@gmail.com>"
 
 WORKDIR /root

@@ -39,6 +39,16 @@ echo '[STEP 8] Install tmux with cool customizations'
 git clone https://github.com/samoshkin/tmux-config.git
 ./tmux-config/install.sh
 
-echo '[STEP 9] Setting zsh as default shell'
+echo '[STEP 9] Install krew kubectl plugin'
+  set -x; cd "$(mktemp -d)" &&
+  curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/download/v0.3.4/krew.{tar.gz,yaml}" &&
+  tar zxvf krew.tar.gz &&
+  KREW=./krew-"$(uname | tr '[:upper:]' '[:lower:]')_amd64" &&
+  "$KREW" install --manifest=krew.yaml --archive=krew.tar.gz &&
+  "$KREW" update
+
+  echo 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"' >>~/.zshrc
+
+echo '[STEP 10] Setting zsh as default shell'
 chsh -s $(which zsh)
 

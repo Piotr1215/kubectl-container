@@ -2,8 +2,7 @@ FROM ubuntu:rolling
 LABEL maintainer="Piotr Zaniewski <piotrzan@gmail.com>"
 
 WORKDIR /root
-
-COPY bootstrap.sh ./
+ARG TARGETARCH=amd64
 
 RUN apt-get update && apt-get -y install --no-install-recommends \
     gnupg \
@@ -14,35 +13,60 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
     ca-certificates \
     zsh \
     tmux \
+    vim \
+    fzf \
     && rm -rf /var/lib/apt/lists/*
 
 ENV SHELL /usr/bin/zsh
 
-RUN echo '[STEP 1] Creating directory for kubectl config' \
+RUN echo '[STEP 1] Creating directory for kubectl config' && \
     mkdir /root/.kube
 
-# Install kubectl
-ARG TARGETARCH=amd64
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
 ARG KUBECTL_VERSION=v1.25.1
-RUN set -x && \
+RUN echo '[STEP 2] Installing kubectl' && \
+    set -x && \
     curl -sLO "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/${TARGETARCH}/kubectl" && \
     chmod +x kubectl && \
-    ./kubectl version --client
-# Bootstrap kubectl
+    ./kubectl version --client && \
+    mv kubectl /usr/local/bin/
 
 # renovate: datasource=github-releases depName=derailed/k9s
 ARG K9S_VERSION=v0.26.6
-RUN echo '[STEP 2] Installing k9s awesomeness' \
-	set -x && wget -c https://github.com/derailed/k9s/releases/download/"${K9S_VERSION}"/k9s_Linux_x86_64.tar.gz -O - \
-        | tar -xz && \
-        chmod +x k9s && \
-        mv k9s /usr/local/bin/
+RUN echo '[STEP 3] Installing k9s awesomeness'  && \
+    set -x && \
+    wget -c https://github.com/derailed/k9s/releases/download/"${K9S_VERSION}"/k9s_Linux_x86_64.tar.gz -O - | tar -xz && \
+    chmod +x k9s && \
+    mv k9s /usr/local/bin/
 
-RUN chmod +x bootstrap.sh && ./bootstrap.sh
+RUN echo '[STEP 4] Installing Oh-My-Zsh' && \
+    wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
+
+RUN echo '[STEP 5] Installing zsh-autosuggestions plugin' && \
+    git clone https://github.com/zsh-users/zsh-autosuggestions /root/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 COPY .zshrc ./
 
-RUN exec zsh
+RUN echo '[STEP 8] Install tmux with cool customizations' && \
+    git clone https://github.com/samoshkin/tmux-config.git && \
+    ./tmux-config/install.sh
 
-ENTRYPOINT ["/bin/zsh"]
+# renovate: datasource=github-releases depName=kubernetes-sigs/krew
+ARG KREW_VERSION=v0.4.3
+RUN echo '[STEP 9] Install krew kubectl plugin' \
+    set -x && \
+    wget https://github.com/kubernetes-sigs/krew/releases/download/"${KREW_VERSION}"/krew-linux_amd64.tar.gz && \
+    tar zxvf krew-linux_amd64.tar.gz && \
+    ./krew-linux_amd64 install krew 
+
+RUN echo '[STEP 6] Installing stern' && \
+    ./krew-linux_amd64 install stern && \
+    ./krew-linux_amd64 install ns && \
+    ./krew-linux_amd64 install ctx
+
+RUN echo '[STEP 10] Setting zsh as default shell' && \
+    chsh -s $(which zsh)
+
+CMD ["zsh"]
+
+# ENTRYPOINT ["/bin/zsh"]

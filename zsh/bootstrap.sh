@@ -1,19 +1,6 @@
 #!/bin/bash
 echo 'Bootstrap steps start here:'
 
-echo '[STEP 1] Creating directory for kubectl config'
-mkdir /root/.kube
-
-# renovate: datasource=github-releases depName=derailed/k9s
-K9S_VERSION=v0.25.18
-echo '[STEP 2] Installing k9s awesomeness'
-(
-	set -x &&
-		wget -c https://github.com/derailed/k9s/releases/download/"${K9S_VERSION}"/k9s_Linux_x86_64.tar.gz -O - | tar -xz &&
-		chmod +x k9s &&
-		mv k9s /usr/local/bin/
-)
-
 echo '[STEP 3] Installing Oh-My-Zsh'
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 

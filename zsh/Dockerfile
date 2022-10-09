@@ -19,7 +19,7 @@ RUN apt-get update && apt-get -y install --no-install-recommends \
 ENV SHELL /usr/bin/zsh
 
 # Install kubectl
-ARG TARGETARCH
+ARG TARGETARCH=amd64
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
 ARG KUBECTL_VERSION=v1.25.2
 RUN set -x && \

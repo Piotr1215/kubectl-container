@@ -32,7 +32,7 @@ RUN set -x && \
 # Bootstrap kubectl
 
 # renovate: datasource=github-releases depName=derailed/k9s
-ARG K9S_VERSION=v0.25.18
+ARG K9S_VERSION=v0.26.6
 RUN echo '[STEP 2] Installing k9s awesomeness' \
 	set -x && wget -c https://github.com/derailed/k9s/releases/download/"${K9S_VERSION}"/k9s_Linux_x86_64.tar.gz -O - \
         | tar -xz && \

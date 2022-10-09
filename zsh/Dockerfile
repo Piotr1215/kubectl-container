@@ -21,7 +21,7 @@ ENV SHELL /usr/bin/zsh
 # Install kubectl
 ARG TARGETARCH=amd64
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
-ARG KUBECTL_VERSION=v1.25.1
+ARG KUBECTL_VERSION=v1.25.2
 RUN set -x && \
     curl -sLO "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/${TARGETARCH}/kubectl" && \
     chmod +x kubectl && \

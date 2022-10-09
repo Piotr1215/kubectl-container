@@ -20,9 +20,11 @@ ENV SHELL /usr/bin/zsh
 
 # Install kubectl
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
-RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
-    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
-    apt-get update && apt-get -y install --no-install-recommends kubectl
+ARG KUBECTL_VERSION=v1.25.2
+RUN set -x && \
+    curl -sLO "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/${TARGETARCH}/kubectl" && \
+    chmod +x kubectl && \
+    ./kubectl version --client
 
 # Bootstrap kubectl
 RUN chmod +x bootstrap.sh && ./bootstrap.sh

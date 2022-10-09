@@ -47,26 +47,26 @@ RUN echo '[STEP 5] Installing zsh-autosuggestions plugin' && \
 
 COPY .zshrc ./
 
-RUN echo '[STEP 8] Install tmux with cool customizations' && \
+RUN echo '[STEP 6] Install tmux with cool customizations' && \
     git clone https://github.com/samoshkin/tmux-config.git && \
     ./tmux-config/install.sh
 
 # renovate: datasource=github-releases depName=kubernetes-sigs/krew
 ARG KREW_VERSION=v0.4.3
-RUN echo '[STEP 9] Install krew kubectl plugin' \
+RUN echo '[STEP 7] Install krew kubectl plugin' \
     set -x && \
     wget https://github.com/kubernetes-sigs/krew/releases/download/"${KREW_VERSION}"/krew-linux_amd64.tar.gz && \
     tar zxvf krew-linux_amd64.tar.gz && \
     ./krew-linux_amd64 install krew 
 
-RUN echo '[STEP 6] Installing stern' && \
+RUN echo '[STEP 8] Installing stern' && \
     ./krew-linux_amd64 install stern && \
     ./krew-linux_amd64 install ns && \
     ./krew-linux_amd64 install ctx
 
-RUN echo '[STEP 10] Setting zsh as default shell' && \
+RUN echo '[STEP 9] Setting zsh as default shell' && \
     chsh -s $(which zsh)
 
-CMD ["zsh"]
+CMD ["k9s"]
 
-# ENTRYPOINT ["/bin/zsh"]
+ENTRYPOINT ["/usr/bin/zsh", "-c"]

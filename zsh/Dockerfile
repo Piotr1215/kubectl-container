@@ -64,7 +64,14 @@ RUN echo '[STEP 8] Installing stern' && \
     ./krew-linux_amd64 install ns && \
     ./krew-linux_amd64 install ctx
 
-RUN echo '[STEP 9] Setting zsh as default shell' && \
+# renovate: datasource=github-releases depName=kubernetes-sigs/krew
+ARG KUBESEAL_VERSION=0.18.0
+RUN echo '[STEP 9] Install kubeseal' && \
+    wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.18.0/kubeseal-"${KUBESEAL_VERSION}"-linux-amd64.tar.gz && \
+    tar -xvf kubeseal-"${KUBESEAL_VERSION}"-linux-amd64.tar.gz && \
+    cp kubeseal /usr/local/bin/
+
+RUN echo '[STEP 10] Setting zsh as default shell' && \
     chsh -s $(which zsh)
 
 CMD ["k9s"]

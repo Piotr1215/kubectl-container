@@ -1,4 +1,4 @@
-name: Build and deploy zsh version to Docker Hub. 
+name: Build and deploy bash version to Docker Hub. 
 
 # Controls when the action will run.
 on:
@@ -36,9 +36,9 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v3.2.0
         with:
-          context: "{{defaultContext}}:zsh"
+          context: "{{defaultContext}}:bash"
           push: true
-          tags: piotrzan/kubectl-comp:v1.0.0-zsh
+          tags: piotrzan/kubectl-comp:v1.0.0-bash
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

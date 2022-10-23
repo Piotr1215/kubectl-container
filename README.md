@@ -5,11 +5,19 @@ Quick testing of a cluster with well-known/customized `kubectl` setup.
 
 ## What is included
 
+> to see all the packages installed in both tags, you can use `docker sbom` command
+
+```bash
+KUBECTL_COMP_VERSION=v1.0.0
+docker sbom piotrzan/kubectl-comp:"$KUBECTL_COMP_VERSION"-bash
+docker sbom piotrzan/kubectl-comp:"$KUBECTL_COMP_VERSION"-zsh
+```
+
 There are two images, one simple image with *bash* shell containing:
 
-- `kubectl` - Kuberneted CLI v 1.20.0 with bash completion
+- `kubectl` - latest
   > It is easy to override `kubectl` version by using `--build-arg` flag in docker build command
-  > `docker build --build-arg KUBECTL_VERSION=v1.19.4 --rm -f "Dockerfile" -t piotrzan/kubectl-comp "."`
+  > `docker build --build-arg KUBECTL_VERSION=v1.19.4 --rm -f "Dockerfile" -t piotrzan/kubectl-comp:v1.0.0-bash "."`
 - useful aliases
 
 Use this image if you want to quickly check and explore Kubernetes cluster without investing too much time.
@@ -17,7 +25,7 @@ This image is optimized for size performance and is based on ``Apline`` base ima
 
 And one is a fancy image for *zsh* with more tools preinstalled:
 
-- `kubectl` - Kubernetes CLI v 1.17.2 with zsh completion
+- `kubectl` - latest
 - `zsh-autosuggestions` - very useful zsh shell plugin showing previous commands and enabling easy autofill of text
 - `helm` - Kubernetes package manager
 - `okteto` - development platform for Kubernetes applications
@@ -58,22 +66,22 @@ __Quickly spin up busybox pod for diagnostic purposes__
 ## Supported tags
 
 - **zsh**
-  docker pull piotrzan/kubectl-comp:zsh
+  docker pull piotrzan/kubectl-comp:v1.0.0-zsh
   [Dockerfile](https://github.com/Piotr1215/kubectl-container/blob/master/zsh/Dockerfile)
 
 - **bash**
-  docker pull piotrzan/kubectl-comp
+  docker pull piotrzan/kubectl-comp:v1.0.0-bash
   [Dockerfile](https://github.com/Piotr1215/kubectl-container/blob/master/bash/Dockerfile)
 
 ## How the images are build
 
 ### Build image with bash shell
 
-    docker build --rm -f "Dockerfile" -t piotrzan/kubectl-comp "."
+    docker build --rm -f "Dockerfile" -t piotrzan/kubectl-comp:v1.0.0-bash "."
 
 ### Build image with zsh shell
 
-    docker build --rm -f "Dockerfile" -t piotrzan/kubectl-comp:zsh "."
+    docker build --rm -f "Dockerfile" -t piotrzan/kubectl-comp:v1.0.0-zsh "."
 
 ## Convinient scripts to run the contianer
 
@@ -90,7 +98,7 @@ By default `make` command will run `zsh` container with direct mount on the *($h
 
 **Run contianer with passthrough to local network**
 
-    docker run -d --network=host --name=kubectl-host --rm -it piotrzan/kubectl-comp
+    docker run -d --network=host --name=kubectl-host --rm -it piotrzan/kubectl-comp:v1.0.0-bash
 
 **Generate raw config from kubeclt on localhost and copy the config to the container**
 
@@ -105,5 +113,5 @@ By default `make` command will run `zsh` container with direct mount on the *($h
 
 If you would like to add your own customization, you can easily do it and use `docker commit` to create your own version of the image.
 
-`docker commit $(docker ps -aqf "name=kubectl-host") piotrzan/kubectl-comp:zsh` - this captures contianer kubectl-host as a new tag
-`docker push piotrzan/kubectl-comp:zsh`
+`docker commit $(docker ps -aqf "name=kubectl-host") piotrzan/kubectl-comp:v1.0.0-zsh` - this captures contianer kubectl-host as a new tag
+`docker push piotrzan/kubectl-comp:v1.0.0-zsh`

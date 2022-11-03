@@ -23,7 +23,7 @@ RUN echo '[STEP 1] Creating directory for kubectl config' && \
     mkdir /root/.kube
 
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
-ARG KUBECTL_VERSION=v1.25.1
+ARG KUBECTL_VERSION=v1.25.3
 RUN echo '[STEP 2] Installing kubectl' && \
     set -x && \
     curl -sLO "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/${TARGETARCH}/kubectl" && \

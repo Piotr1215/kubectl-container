@@ -52,7 +52,7 @@ RUN echo '[STEP 6] Install tmux with cool customizations' && \
     ./tmux-config/install.sh
 
 # renovate: datasource=github-releases depName=kubernetes-sigs/krew
-ARG KREW_VERSION=v0.4.3
+ARG KREW_VERSION=v0.4.4
 RUN echo '[STEP 7] Install krew kubectl plugin' \
     set -x && \
     wget https://github.com/kubernetes-sigs/krew/releases/download/"${KREW_VERSION}"/krew-linux_amd64.tar.gz && \

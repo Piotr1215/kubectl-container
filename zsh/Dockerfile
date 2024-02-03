@@ -1,4 +1,4 @@
-FROM ubuntu:mantic-20231011
+FROM ubuntu:mantic-20240122
 LABEL maintainer="Piotr Zaniewski <piotrzan@gmail.com>"
 
 WORKDIR /root
